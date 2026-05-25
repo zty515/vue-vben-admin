@@ -26,10 +26,10 @@ const tabs = ref([
     label: '修改密码',
     value: 'password',
   },
-  {
-    label: '新消息提醒',
-    value: 'notice',
-  },
+  // {
+  //   label: '新消息提醒',
+  //   value: 'notice',
+  // },
 ]);
 </script>
 <template>
