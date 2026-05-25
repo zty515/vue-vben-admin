@@ -52,7 +52,6 @@ async function bootstrap(namespace: string) {
   // 初始化 tippy
   const { initTippy } = await import('@vben/common-ui/es/tippy');
   initTippy(app);
-
   // 配置路由及路由守卫
   app.use(router);
 

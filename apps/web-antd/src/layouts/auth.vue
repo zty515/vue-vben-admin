@@ -15,6 +15,7 @@ const logoDark = computed(() => preferences.logo.sourceDark);
   <AuthPageLayout
     :app-name="appName"
     :logo="logo"
+    :toolbar="false"
     :logo-dark="logoDark"
     :page-description="$t('authentication.pageDesc')"
     :page-title="$t('authentication.pageTitle')"

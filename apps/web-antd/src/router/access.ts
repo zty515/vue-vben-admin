@@ -24,12 +24,16 @@ async function generateAccess(options: GenerateMenuAndRoutesOptions) {
 
   return await generateAccessible(preferences.app.accessMode, {
     ...options,
+
     fetchMenuListAsync: async () => {
       message.loading({
         content: `${$t('common.loadingMenu')}...`,
         duration: 1.5,
       });
-      return await getAllMenusApi();
+      const res = await getAllMenusApi();
+      const routeList = res?.list || [];
+
+      return routeList;
     },
     // 可以指定没有权限跳转403页面
     forbiddenComponent,

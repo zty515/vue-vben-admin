@@ -19,18 +19,20 @@ const routes: RouteRecordRaw[] = [
         meta: {
           affixTab: true,
           icon: 'lucide:area-chart',
-          title: $t('page.dashboard.analytics'),
+          title: '分析页',
+          // title: $t('page.dashboard.analytics'),
         },
       },
-      {
-        name: 'Workspace',
-        path: '/workspace',
-        component: () => import('#/views/dashboard/workspace/index.vue'),
-        meta: {
-          icon: 'carbon:workspace',
-          title: $t('page.dashboard.workspace'),
-        },
-      },
+      // {
+      //   name: 'Workspace',
+      //   path: '/workspace',
+      //   component: () => import('#/views/dashboard/workspace/index.vue'),
+      //   meta: {
+      //     icon: 'carbon:workspace',
+      //     // title: $t('page.dashboard.workspace')
+      //     title:'工作台'
+      //   },
+      // },
     ],
   },
 ];
