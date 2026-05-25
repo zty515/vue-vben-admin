@@ -182,21 +182,23 @@ function onCreate() {
 
       <template #operation="{ row }">
         <div class="flex justify-center gap-2">
-          <Button
-            type="link"
-            size="small"
-            @click="onActionClick({ code: 'edit', row })"
-          >
-            编辑
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            danger
-            @click="onActionClick({ code: 'delete', row })"
-          >
-            删除
-          </Button>
+          <AccessControl :codes="['roles.update', 'roles.destroy']" type="code">
+            <Button
+              type="link"
+              size="small"
+              @click="onActionClick({ code: 'edit', row })"
+            >
+              编辑
+            </Button>
+            <Button
+              type="link"
+              size="small"
+              danger
+              @click="onActionClick({ code: 'delete', row })"
+            >
+              删除
+            </Button>
+          </AccessControl>
         </div>
       </template>
     </Grid>

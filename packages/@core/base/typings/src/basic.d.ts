@@ -12,6 +12,7 @@ interface BasicUserInfo {
    * 头像
    */
   avatar: string;
+  buttons: string[];
   /**
    * 用户昵称
    */

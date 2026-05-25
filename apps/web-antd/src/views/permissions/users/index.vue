@@ -2,6 +2,7 @@
 // import type { SystemDeptApi, SystemUserApi } from '#/api';
 import { onMounted, ref } from 'vue';
 
+import { AccessControl } from '@vben/access';
 import { Page, useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
@@ -169,29 +170,33 @@ onMounted(() => {
     <FormDrawer @success="onRefresh" />
     <Grid table-title="员工列表">
       <template #toolbar-tools>
-        <Button type="primary" @click="onCreate">
-          <Plus class="size-5" />
-          {{ $t('ui.actionTitle.create', ['员工']) }}
-        </Button>
+        <AccessControl :codes="['users.store']" type="code">
+           <Button type="primary" @click="onCreate">
+            <Plus class="size-5" />
+            {{ $t('ui.actionTitle.create', ['员工']) }}
+          </Button>
+        </AccessControl>
       </template>
 
       <template #operation="{ row }">
         <div class="flex justify-center gap-2">
-          <Button
-            type="link"
-            size="small"
-            @click="onActionClick({ code: 'edit', row })"
-          >
-            编辑
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            danger
-            @click="onActionClick({ code: 'delete', row })"
-          >
-            删除
-          </Button>
+          <AccessControl :codes="['users.update','users.destroy']" type="code">
+             <Button
+              type="link"
+              size="small"
+              @click="onActionClick({ code: 'edit', row })"
+            >
+              编辑
+            </Button>
+            <Button
+              type="link"
+              size="small"
+              danger
+              @click="onActionClick({ code: 'delete', row })"
+            >
+              删除
+            </Button>
+          </AccessControl>
         </div>
       </template>
     </Grid>

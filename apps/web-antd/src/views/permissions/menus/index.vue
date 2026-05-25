@@ -4,6 +4,7 @@ import type { VxeGridProps } from '#/adapter/vxe-table';
 
 import { computed, ref } from 'vue';
 
+import { AccessControl } from '@vben/access';
 import { useVbenModal, VbenButton } from '@vben/common-ui';
 
 import { Button, message } from 'ant-design-vue';
@@ -279,21 +280,25 @@ const deletemenu = async (id: number) => {
   <div class="w-full">
     <Grid>
       <template #toolbar-tools>
-        <VbenButton @click="handleAdd">添加菜单</VbenButton>
+        <AccessControl :codes="['permissions.store']" type="code">
+          <VbenButton @click="handleAdd">添加菜单</VbenButton>
+        </AccessControl>
       </template>
 
       <template #action="{ row }">
-        <Button type="primary" size="small" @click="handleEdit(row)">
-          编辑
-        </Button>
-        <Button
-          danger
-          style="margin-left: 8px"
-          size="small"
-          @click="deletemenu(row.id)"
-        >
-          删除
-        </Button>
+         <AccessControl :codes="['permissions.update','permissions.destroy']" type="code">
+            <Button type="primary" size="small" @click="handleEdit(row)">
+              编辑
+            </Button>
+            <Button
+              danger
+              style="margin-left: 8px"
+              size="small"
+              @click="deletemenu(row.id)"
+            >
+              删除
+            </Button>
+         </AccessControl>
       </template>
     </Grid>
 

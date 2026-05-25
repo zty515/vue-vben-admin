@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { LOGIN_PATH } from '@vben/constants';
+import { preferences } from '@vben/preferences';
 import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 
 import { notification } from 'ant-design-vue';
@@ -24,7 +25,10 @@ export const useAuthStore = defineStore('auth', () => {
    * Asynchronously handle the login process
    * @param params 登录表单数据
    */
-  async function authLogin(params: Recordable<any>) {
+  async function authLogin(
+    params: Recordable<any>,
+    onSuccess?: () => Promise<void> | void,
+  ) {
     // 异步处理用户登录操作并获取 accessToken
     let userInfo: null | UserInfo = null;
     try {
@@ -42,21 +46,21 @@ export const useAuthStore = defineStore('auth', () => {
         // ]);
 
         const fetchUserInfoResult = await fetchUserInfo();
-
+        const accessCodes = fetchUserInfoResult?.buttons || [];
         userInfo = fetchUserInfoResult;
 
         userStore.setUserInfo(userInfo);
-        // accessStore.setAccessCodes(accessCodes);
+        accessStore.setAccessCodes(accessCodes);
 
-        // if (accessStore.loginExpired) {
-        //   accessStore.setLoginExpired(false);
-        // } else {
-        //   onSuccess
-        //     ? await onSuccess?.()
-        //     : await router.push(
-        //         userInfo.homePath || preferences.app.defaultHomePath,
-        //       );
-        // }
+        if (accessStore.loginExpired) {
+          accessStore.setLoginExpired(false);
+        } else {
+          onSuccess
+            ? await onSuccess?.()
+            : await router.push(
+                userInfo.homePath || preferences.app.defaultHomePath,
+              );
+        }
 
         if (userInfo?.name) {
           notification.success({
