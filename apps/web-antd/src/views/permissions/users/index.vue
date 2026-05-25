@@ -171,7 +171,7 @@ onMounted(() => {
     <Grid table-title="员工列表">
       <template #toolbar-tools>
         <AccessControl :codes="['users.store']" type="code">
-           <Button type="primary" @click="onCreate">
+          <Button type="primary" @click="onCreate">
             <Plus class="size-5" />
             {{ $t('ui.actionTitle.create', ['员工']) }}
           </Button>
@@ -180,8 +180,8 @@ onMounted(() => {
 
       <template #operation="{ row }">
         <div class="flex justify-center gap-2">
-          <AccessControl :codes="['users.update','users.destroy']" type="code">
-             <Button
+          <AccessControl :codes="['users.update', 'users.destroy']" type="code">
+            <Button
               type="link"
               size="small"
               @click="onActionClick({ code: 'edit', row })"

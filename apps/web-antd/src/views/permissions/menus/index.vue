@@ -286,19 +286,22 @@ const deletemenu = async (id: number) => {
       </template>
 
       <template #action="{ row }">
-         <AccessControl :codes="['permissions.update','permissions.destroy']" type="code">
-            <Button type="primary" size="small" @click="handleEdit(row)">
-              编辑
-            </Button>
-            <Button
-              danger
-              style="margin-left: 8px"
-              size="small"
-              @click="deletemenu(row.id)"
-            >
-              删除
-            </Button>
-         </AccessControl>
+        <AccessControl
+          :codes="['permissions.update', 'permissions.destroy']"
+          type="code"
+        >
+          <Button type="primary" size="small" @click="handleEdit(row)">
+            编辑
+          </Button>
+          <Button
+            danger
+            style="margin-left: 8px"
+            size="small"
+            @click="deletemenu(row.id)"
+          >
+            删除
+          </Button>
+        </AccessControl>
       </template>
     </Grid>
 
